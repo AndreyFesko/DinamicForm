@@ -19,9 +19,11 @@ def index(request):
             for count in range(1,len(request.POST)-1):
                 query = 'name' + str(count)
                 input_value = request.POST[query]
-                data = json.dumps(input_value)
-                field = json.dumps(query)
-                InputModel.objects.create(data=data,field=field)
+                #Check for empty field
+                if input_value:
+                    data = json.dumps(input_value)
+                    field = json.dumps(query)
+                    InputModel.objects.create(data=data,field=field)
                 count += 1
         return redirect('/done/')
     else:
