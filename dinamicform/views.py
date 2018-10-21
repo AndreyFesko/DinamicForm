@@ -11,7 +11,7 @@ def index(request):
             #Take data from the initial form
             name_input = form.cleaned_data['name0']
             #Convert to json type
-            data = json.dumps(name_input)
+            data = json.dumps(name_input,ensure_ascii=False)
             #Create object
             InputModel.objects.create(data=data,field='name0')
 
@@ -21,7 +21,7 @@ def index(request):
                 input_value = request.POST[query]
                 #Check for empty field
                 if input_value:
-                    data = json.dumps(input_value)
+                    data = json.dumps(input_value,ensure_ascii=False)
                     field = json.dumps(query)
                     InputModel.objects.create(data=data,field=field)
                 count += 1
